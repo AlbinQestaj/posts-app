@@ -17,7 +17,8 @@ import {
   MenuItem,
   IconButton,
   Flex,
-  Spacer
+  Spacer,
+  Link
 } from '@chakra-ui/react';
 import { usePostStore } from '../stores/postStore';
 import { useRouter } from 'next/router';
@@ -58,6 +59,7 @@ const PostList: React.FC = () => {
         setPosts(response.data.posts);
         setTotalPages(response.data.totalPages);
         setIsLoading(false);
+        console.log('response', response)
       }
     } catch (err) {
       setIsLoading(false);
@@ -81,7 +83,7 @@ const PostList: React.FC = () => {
   return (
     <Box>
       <VStack spacing={4} align="center">
-        <Card w="50%" p='20px'>
+        <Card w="50%" p="20px">
           <CardHeader>
             <Heading size="md">Posts</Heading>
           </CardHeader>
@@ -134,7 +136,11 @@ const PostList: React.FC = () => {
 
               <Flex>
                 <Box>
-                  <Heading size="xs" textTransform="uppercase" textColor={'GrayText'}>
+                  <Heading
+                    size="xs"
+                    textTransform="uppercase"
+                    textColor={'GrayText'}
+                  >
                     Lorem ipsum
                   </Heading>
                   <Text pt="2" fontSize="sm" textColor={'GrayText'}>
@@ -148,10 +154,12 @@ const PostList: React.FC = () => {
                   textTransform="uppercase"
                   textColor={'GrayText'}
                 >
-                  <Button>
-                    Add
-                    <AddIcon marginLeft={'10px'}/>
-                  </Button>
+                  <Link href="/create">
+                    <Button>
+                      Add
+                      <AddIcon marginLeft={'10px'} />
+                    </Button>
+                  </Link>
                 </Heading>
               </Flex>
             </Stack>

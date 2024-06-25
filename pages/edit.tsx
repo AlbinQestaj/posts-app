@@ -13,7 +13,6 @@ const EditPostPage: React.FC = () => {
 
   return (
     <Box p={4}>
-      <Heading mb={4}>Edit Post</Heading>
       <PostForm post={post} />
     </Box>
   );

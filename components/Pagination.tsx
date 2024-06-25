@@ -1,7 +1,4 @@
-import {
-  Button,
-  HStack
-} from '@chakra-ui/react';
+import { Button, HStack } from '@chakra-ui/react';
 
 interface PaginationProps {
   currentPage: number;
@@ -16,6 +13,7 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+  console.log('currentPage', currentPage);
   return (
     <HStack spacing={4} mt={4} justifyContent="center">
       <Button

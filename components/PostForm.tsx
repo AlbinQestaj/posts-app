@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { Box, Button, Input, Textarea, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Card,
+  Input,
+  Textarea,
+  VStack,
+  CardHeader,
+  Heading,
+  CardBody,
+  Stack,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { usePostStore } from '../stores/postStore';
 import axiosInstance from '../utils/axiosInstance';
@@ -31,21 +42,37 @@ const PostForm: React.FC<PostFormProps> = ({ post }) => {
   };
 
   return (
-    <Box>
-      <VStack spacing={4} align="flex-start">
-        <Input
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <Textarea
-          placeholder="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-        <Button onClick={handleSubmit}>
-          {post ? 'Update Post' : 'Create Post'}
-        </Button>
+    <Box
+      width={'100vw'}
+      height={'75vh'}
+      alignContent={'center'}
+      justifyContent={'center'}
+    >
+      <VStack>
+        <Card w="50%" p="20px">
+          <CardHeader>
+            <Heading size="md">
+              {post ? 'Edit Post' : 'Create a new Post'}
+            </Heading>
+          </CardHeader>
+          <CardBody>
+            <Stack spacing="2">
+              <Input
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <Textarea
+                placeholder="Content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <Button onClick={handleSubmit}>
+                {post ? 'Update Post' : 'Create Post'}
+              </Button>
+            </Stack>
+          </CardBody>
+        </Card>
       </VStack>
     </Box>
   );
