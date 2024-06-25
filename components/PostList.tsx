@@ -18,12 +18,12 @@ import {
   IconButton,
   Flex,
   Spacer,
-  Link
+  Link,
 } from '@chakra-ui/react';
 import { usePostStore } from '../stores/postStore';
 import { useRouter } from 'next/router';
 import axiosInstance from '../utils/axiosInstance';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
   EditIcon,
   DeleteIcon,
@@ -46,7 +46,35 @@ const PostList: React.FC = () => {
   const router = useRouter();
   const SkeletonPosts: Number[] = Array.from({ length: 5 }, (_, i) => i);
 
-  const fetchPosts = async () => {
+  // const fetchPosts = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const response = await axiosInstance.get('/posts', {
+  //       params: {
+  //         page: currentPage,
+  //         limit: 5,
+  //       },
+  //     });
+  //     if (response) {
+  //       setPosts(response.data.posts);
+  //       setTotalPages(response.data.totalPages);
+  //       setIsLoading(false);
+  //       console.log('response', response);
+  //     }
+  //   } catch (err) {
+  //     setIsLoading(false);
+  //     if (err instanceof Error) {
+  //       console.log('ERROR: ', err.message);
+  //     } else {
+  //       console.log('ERROR: ', err);
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchPosts();
+  // }, [currentPage]);
+  const fetchPosts = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await axiosInstance.get('/posts', {
@@ -59,7 +87,6 @@ const PostList: React.FC = () => {
         setPosts(response.data.posts);
         setTotalPages(response.data.totalPages);
         setIsLoading(false);
-        console.log('response', response)
       }
     } catch (err) {
       setIsLoading(false);
@@ -69,11 +96,11 @@ const PostList: React.FC = () => {
         console.log('ERROR: ', err);
       }
     }
-  };
+  }, [currentPage, setPosts, setTotalPages, setIsLoading]);
 
   useEffect(() => {
     fetchPosts();
-  }, [currentPage]);
+  }, [fetchPosts]);
 
   const handleDelete = async (postId: string) => {
     await axiosInstance.delete(`/posts/${postId}`);
