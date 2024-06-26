@@ -49,7 +49,7 @@ const PostForm: React.FC<PostFormProps> = ({ post }) => {
       justifyContent={'center'}
     >
       <VStack>
-        <Card w="50%" p="20px">
+        <Card w={{ base: '90%', md: '50%', lg: '50%' }} p="20px">
           <CardHeader>
             <Heading size="md">
               {post ? 'Edit Post' : 'Create a new Post'}

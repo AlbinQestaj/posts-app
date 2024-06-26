@@ -46,34 +46,6 @@ const PostList: React.FC = () => {
   const router = useRouter();
   const SkeletonPosts: Number[] = Array.from({ length: 5 }, (_, i) => i);
 
-  // const fetchPosts = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const response = await axiosInstance.get('/posts', {
-  //       params: {
-  //         page: currentPage,
-  //         limit: 5,
-  //       },
-  //     });
-  //     if (response) {
-  //       setPosts(response.data.posts);
-  //       setTotalPages(response.data.totalPages);
-  //       setIsLoading(false);
-  //       console.log('response', response);
-  //     }
-  //   } catch (err) {
-  //     setIsLoading(false);
-  //     if (err instanceof Error) {
-  //       console.log('ERROR: ', err.message);
-  //     } else {
-  //       console.log('ERROR: ', err);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchPosts();
-  // }, [currentPage]);
   const fetchPosts = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -110,7 +82,7 @@ const PostList: React.FC = () => {
   return (
     <Box>
       <VStack spacing={4} align="center">
-        <Card w="50%" p="20px">
+        <Card w={{ base: '90%', md: '50%', lg: '50%' }} p="20px">
           <CardHeader>
             <Heading size="md">Posts</Heading>
           </CardHeader>
